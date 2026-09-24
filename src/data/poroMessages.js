@@ -1,5 +1,3 @@
-// Sustituiremos estas frases generales por datos reales que tú nos compartas.
-// La clave de cada mensaje coincide con el id de su sección en la página.
 export const poroMessages = {
   inicio: '¡Hola! Soy su poro. Los acompaño entre recuerdos y porogalletas. ♡',
   historia: 'Estoy listo para escuchar cómo empezó su historia. ♡',

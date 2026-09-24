@@ -1,4 +1,3 @@
-// Las props son los datos que recibe un componente desde quien lo utiliza.
 export default function Section({ id, number, title, children }) {
   return (
     <section id={id} data-poro-section aria-labelledby={`${id}-titulo`} className="story-section scroll-mt-8 border-t border-line/70 py-16 sm:py-24">

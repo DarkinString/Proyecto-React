@@ -13,7 +13,6 @@ import GamesSection from '../features/games/GamesSection.jsx';
 import CollectiblesSection from '../features/collectibles/CollectiblesSection.jsx';
 import useGameProgress from '../hooks/useGameProgress.js';
 
-// App compone la página: el orden de estos componentes es su orden en pantalla.
 export default function App() {
   const { theme, toggleTheme } = useTheme();
   const { records, saveResult, storageError } = useGameProgress();

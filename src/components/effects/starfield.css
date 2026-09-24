@@ -1,4 +1,3 @@
-/* Una capa decorativa adicional, independiente de las luces y el brillo del cursor. */
 .background-starfield {
   position: absolute;
   inset: 0;
@@ -41,14 +40,12 @@
   animation: background-star-breathe var(--star-duration) ease-in-out var(--star-delay) infinite;
 }
 
-/* El brillo sube y baja lentamente; nunca se enciende y apaga de golpe. */
 @keyframes background-star-breathe {
   0%, 100% { opacity: 0.16; transform: translate(-50%, -50%) scale(0.88); }
   50% { opacity: 0.52; transform: translate(-50%, -50%) scale(1.12); }
 }
 
 @media (max-width: 600px) {
-  /* 24 estrellas en móvil, 32 en pantallas más amplias. */
   .background-star:nth-child(4n) { display: none; }
 }
 

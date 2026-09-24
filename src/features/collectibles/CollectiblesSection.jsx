@@ -15,7 +15,6 @@ export default function CollectiblesSection({ records, storageError }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [openLevel, setOpenLevel] = useState(null);
   const unlockedCount = GAME_LEVELS.filter((level) => getLevelCollection(records, level.id).unlocked).length;
-  // El visor depende de los registros actuales: si desaparece el premio, se cierra.
   const visibleLevel = openLevel && getLevelCollection(records, openLevel.id).unlocked ? openLevel : null;
 
   function updateActive() {
@@ -37,7 +36,6 @@ export default function CollectiblesSection({ records, storageError }) {
     const slide = element.children[next];
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       || document.querySelector('[data-motion="off"]');
-    // scrollTo solo mueve este carrusel, sin cambiar el desplazamiento vertical.
     element.scrollTo({ left: slide.offsetLeft, behavior: reduced ? 'instant' : 'smooth' });
   }
 

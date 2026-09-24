@@ -2,7 +2,6 @@ import { useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import './imageLightbox.css';
 
-// El diálogo nativo mantiene el foco dentro del visor y vuelve inerte el fondo.
 export default function ImageLightbox({ src, alt, title, caption, onClose }) {
   const dialog = useRef(null);
   const closeButton = useRef(null);
@@ -19,7 +18,6 @@ export default function ImageLightbox({ src, alt, title, caption, onClose }) {
     return () => {
       element.close();
       document.body.style.overflow = previousOverflow;
-      // Si el botón sigue en la página, el teclado vuelve al punto de partida.
       if (opener instanceof HTMLElement && opener.isConnected) opener.focus({ preventScroll: true });
     };
   }, []);

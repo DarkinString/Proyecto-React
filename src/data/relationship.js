@@ -1,4 +1,3 @@
-// Textos provisionales. Aquí pondremos sus palabras cuando nos las compartas.
 export const relationship = {
   dedication: 'Para mi persona favorita',
   headline: 'Todo lo bonito me lleva a ti.',

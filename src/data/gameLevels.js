@@ -2,8 +2,6 @@ import moonGarden from '../assets/images/memories/moon-garden.svg';
 import sharedConstellation from '../assets/images/memories/shared-constellation.svg';
 import lilacLetter from '../assets/images/memories/lilac-letter.svg';
 
-// Sustituiremos image y alt con sus fotos cuando ustedes las elijan.
-// isPlaceholder evita presentar estas ilustraciones como recuerdos reales.
 export const GAME_LEVELS = [
   {
     id: 'recuerdo-1',

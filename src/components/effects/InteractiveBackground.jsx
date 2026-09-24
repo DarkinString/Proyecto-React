@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './starfield.css';
 
-// Posiciones fijas: las estrellas no saltan de lugar cuando React vuelve a dibujar.
 const stars = [
   [7, 9], [24, 5], [42, 14], [61, 7], [79, 17], [94, 8],
   [15, 25], [34, 31], [53, 23], [71, 34], [88, 28],
