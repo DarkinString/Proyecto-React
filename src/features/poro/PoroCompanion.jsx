@@ -53,7 +53,7 @@ export default function PoroCompanion({ gameMessage, gameDock }) {
       });
       setActiveSection(nearest);
     }
-    // Una sola lectura por fotograma, también cuando el juego cambia de altura.
+    
     function scheduleUpdate() { if (frame === undefined) frame = requestAnimationFrame(updateSection); }
     const observer = new ResizeObserver(scheduleUpdate);
     sections.forEach((section) => observer.observe(section));
@@ -130,7 +130,5 @@ export default function PoroCompanion({ gameMessage, gameDock }) {
       <p className="sr-only">También puedes moverme con las flechas del teclado y restablecer mi posición con Escape.</p>
     </aside>
   );
-  // Mantener el mismo portal al levantarlo evita perder la captura del puntero.
-  // Solo CSS cambia de su espacio junto al tablero a una posición fija.
   return gameDock ? createPortal(companion, gameDock) : companion;
 }

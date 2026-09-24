@@ -1,4 +1,3 @@
-// El motor no conoce React: recibe datos, calcula una jugada y devuelve datos nuevos.
 export const SIZE = 6;
 const CELL_COUNT = SIZE * SIZE;
 const MAX_CASCADES = 40;
@@ -44,7 +43,7 @@ export function findMatches(board) {
   validateBoard(board);
   const matches = new Set();
 
-  // Una fila y una columna son la misma búsqueda con distinto punto de inicio y salto.
+  
   for (let line = 0; line < SIZE; line += 1) {
     for (const vertical of [false, true]) {
       const start = vertical ? line : line * SIZE;
@@ -87,20 +86,20 @@ export function createBoard(types, rng = Math.random) {
   for (let attempt = 0; attempt < MAX_BOARD_ATTEMPTS; attempt += 1) {
     const board = [];
     for (let index = 0; index < CELL_COUNT; index += 1) {
-      // Evitamos una coincidencia al colocar cada pieza, sin tener que resolverla después.
+      
       const candidates = Array.from({ length: types }, (_, type) => type).filter((type) => {
         const threeAcross = index % SIZE >= 2 && board[index - 1] === type && board[index - 2] === type;
         const threeDown = index >= SIZE * 2 && board[index - SIZE] === type && board[index - SIZE * 2] === type;
         return !threeAcross && !threeDown;
       });
-      // Con dos tipos, alguna combinación de vecinos puede excluir ambos.
+      
       if (!candidates.length) break;
       board.push(candidates[randomIndex(candidates.length, rng)]);
     }
     if (board.length === CELL_COUNT && findPossibleMove(board)) return board;
   }
 
-  // Respaldo determinista: incluso un generador constante produce un tablero jugable.
+  
   const board = Array.from({ length: CELL_COUNT }, (_, index) => (Math.floor(index / SIZE) + index % SIZE) % types);
   board[2] = 0;
   board[SIZE + 1] = 0;
@@ -150,12 +149,11 @@ export function resolveMove(board, from, to, types, rng = Math.random) {
     steps.push({ matched: [...matched], board: [...next], points: wavePoints });
     cleared += matched.length;
     points += wavePoints;
-    // Una oleada aporta como máximo un combo: cuatro piezas o una cascada posterior.
+    
     if (matched.length >= 4 || waveIndex > 0) comboCount += 1;
     matched = findMatches(next);
   }
 
-  // Si faltan jugadas o se alcanza el límite de cascadas, renovamos el tablero sin cobrar un turno.
   const reshuffled = matched.length > 0 || !findPossibleMove(next);
   if (reshuffled) next = createBoard(types, rng);
   return { valid: true, board: [...next], steps, cleared, points, comboCount, reshuffled };
@@ -173,7 +171,6 @@ export function levelSettings(difficulty, levelIndex = 0) {
   };
 }
 
-// Se llama al ganar: completar el nivel ya concede una estrella.
 export function rateStars({ elapsedSeconds, comboCount, difficulty, levelIndex = 0 }) {
   if (!Number.isFinite(elapsedSeconds) || elapsedSeconds < 0 || !Number.isInteger(comboCount) || comboCount < 0) {
     throw new RangeError('El tiempo y los combos deben ser cantidades positivas o cero.');

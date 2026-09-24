@@ -14,8 +14,6 @@ export function youtubeEmbedUrl(track, siteOrigin) {
     ...(track.kind === 'playlist' ? { listType: 'playlist', list: track.id } : {}) });
   return url.href;
 }
-
-// Una sola descarga compartida; StrictMode puede montar/desmontar componentes dos veces.
 export function loadYouTubePlayer() {
   if (window.YT?.Player) return Promise.resolve(window.YT);
   if (apiPromise) return apiPromise;
@@ -44,7 +42,6 @@ export function loadYouTubePlayer() {
       settled = true;
       cleanup();
       resolve(window.YT);
-      // Un callback ajeno no debe convertir nuestra descarga correcta en un rechazo.
       if (typeof previousReady === 'function') previousReady();
     };
     window.onYouTubeIframeAPIReady = ready;

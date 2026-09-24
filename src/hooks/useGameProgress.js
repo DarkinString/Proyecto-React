@@ -8,8 +8,6 @@ export default function useGameProgress() {
   const saveResult = useCallback((result) => {
     let isRecord = false;
     const saved = updateItems((current) => {
-      // updateItems ejecuta esto de forma síncrona después de releer localStorage.
-      // Así también contamos los resultados guardados desde otra pestaña.
       isRecord = isTimeRecord(current, result);
       return addGameRecord(current, result);
     });

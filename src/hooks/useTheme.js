@@ -4,7 +4,7 @@ function initialTheme() {
   try {
     const saved = localStorage.getItem('mirukaleta.theme');
     if (saved === 'light' || saved === 'dark') return saved;
-  } catch { /* La página sigue funcionando si el navegador bloquea el almacenamiento. */ }
+  } catch {  }
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
@@ -14,7 +14,7 @@ export default function useTheme() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
-    try { localStorage.setItem('mirukaleta.theme', theme); } catch { /* Preferencia solo en memoria. */ }
+    try { localStorage.setItem('mirukaleta.theme', theme); } catch {  }
   }, [theme]);
 
   function toggleTheme() {

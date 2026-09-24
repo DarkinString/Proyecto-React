@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { clampFloatingPosition } from '../utils/floatingPosition.js';
 import { createHoldGesture } from '../utils/holdGesture.js';
 
-// Un mismo gesto para ventanas y mascotas; los clics breves siguen siendo clics.
 export default function useFloatingDrag({ enabled = true, holdDelay = 2000, initialPosition = null, onDragStart, onReset } = {}) {
   const ref = useRef(null);
   const [position, setPosition] = useState(initialPosition);
@@ -28,7 +27,6 @@ export default function useFloatingDrag({ enabled = true, holdDelay = 2000, init
     }
   }
 
-  // Una callback ref también detecta cuando el portal del poro cambia de nodo.
   const attachRef = useCallback((element) => {
     sizeObserver.current?.disconnect();
     ref.current = element;
@@ -52,7 +50,6 @@ export default function useFloatingDrag({ enabled = true, holdDelay = 2000, init
     options.current.onReset?.();
   }
 
-  // El marco puede arrastrarse sin apropiarse de sus botones, enlaces o campos.
   function isNestedControl(event) {
     const control = event.target.closest?.('button, a, input, textarea, select, iframe, [contenteditable="true"]');
     return control && control !== event.currentTarget;
@@ -66,8 +63,7 @@ export default function useFloatingDrag({ enabled = true, holdDelay = 2000, init
     const origin = { x: bounds.left, y: bounds.top };
     const pointerId = event.pointerId;
     const surface = event.currentTarget;
-    // Conserva el gesto aunque el cursor salga de la imagen o atraviese el video.
-    try { surface.setPointerCapture(pointerId); } catch { /* El navegador puede haber cancelado el puntero. */ }
+    try { surface.setPointerCapture(pointerId); } catch { }
     setHolding(true);
     const gesture = createHoldGesture({
       start, delay: options.current.holdDelay,
@@ -89,7 +85,7 @@ export default function useFloatingDrag({ enabled = true, holdDelay = 2000, init
         window.removeEventListener('pointercancel', up);
         window.removeEventListener('blur', finish);
         surface.removeEventListener('lostpointercapture', finish);
-        try { surface.releasePointerCapture(pointerId); } catch { /* Ya liberado. */ }
+        try { surface.releasePointerCapture(pointerId); } catch {  }
         cleanupGesture.current = null;
       },
     });

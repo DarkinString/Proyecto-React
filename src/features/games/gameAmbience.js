@@ -1,4 +1,4 @@
-// Controla un <audio> real. Los estados proceden de sus eventos, no de un temporizador.
+
 export function createGameAmbience(audio, { onStatus, onStart, volume = 55 } = {}) {
   let disposed = false;
   let wanted = false;
@@ -22,7 +22,7 @@ export function createGameAmbience(audio, { onStatus, onStart, volume = 55 } = {
   }
 
   function paused() {
-    // Ignoramos un evento antiguo de pause si una nueva llamada ya está reproduciendo.
+    
     if (!audio.paused || disposed) return;
     wanted = false;
     generation += 1;
@@ -55,12 +55,12 @@ export function createGameAmbience(audio, { onStatus, onStart, volume = 55 } = {
     audio.muted = false;
     report('loading');
     try {
-      // Esta línea se ejecuta dentro del clic. play() informa si el navegador lo acepta.
+      
       const promise = audio.play();
       Promise.resolve(promise).then(() => {
         if (disposed || !wanted) { audio.pause(); return; }
         if (token !== generation) return;
-        // «playing» es quien confirma sonido en marcha; resolver play no inventa ese estado.
+        
       }).catch((error) => {
         if (disposed || token !== generation || !wanted) return;
         wanted = false;

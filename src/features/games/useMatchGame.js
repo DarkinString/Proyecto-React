@@ -4,7 +4,7 @@ import { createBoard, findPossibleMove, levelSettings, rateStars, resolveMove } 
 const emptyGame = { phase: 'setup', board: [], points: 0, cleared: 0, comboCount: 0, movesLeft: 0, matched: [], busy: false, result: null };
 const encouragements = ['Cada pasito nos acerca a otro recuerdo. ♡', 'Respira, mira los colores… yo creo en ti.', '¡Qué bonito construir algo juntos, pieza por pieza!'];
 
-// Este hook coordina el motor, el reloj y las animaciones; el motor no conoce React.
+
 export default function useMatchGame({ onWin, onMessage }) {
   const [game, setGame] = useState(emptyGame);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);

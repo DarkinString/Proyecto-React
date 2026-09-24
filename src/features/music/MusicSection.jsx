@@ -102,7 +102,6 @@ export default function MusicSection() {
       stopRequest();
       setExternalSearch(externalUrl);
       setNotice('Busca en YouTube y pega aquí el enlace para escucharlo juntos.');
-      // Ocurre directamente durante el envío del formulario, antes de esperar cualquier promesa.
       window.open(externalUrl, '_blank', 'noopener');
       return;
     }

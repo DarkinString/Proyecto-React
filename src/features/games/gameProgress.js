@@ -1,4 +1,4 @@
-// Este modelo no depende de React: podemos comprobar sus reglas con pruebas de Node.
+
 export const GAME_RECORDS_KEY = 'mirukaleta.game.records.v1';
 
 const difficulties = new Set(['easy', 'medium', 'hard']);
@@ -34,7 +34,7 @@ export function getLevelCollection(records, levelId) {
   };
 }
 
-// El marcador compara el mismo nivel y dificultad; cada sobrenombre ocupa un lugar.
+
 export function getLeaderboard(records, difficulty, levelId) {
   const ranked = records
     .filter((record) => record.difficulty === difficulty && record.levelId === levelId)
@@ -53,12 +53,12 @@ export function getLeaderboard(records, difficulty, levelId) {
 export function isTimeRecord(records, result) {
   const comparable = records.filter((record) => record.levelId === result.levelId
     && record.difficulty === result.difficulty && record.id !== result.id);
-  // La primera victoria establece el primer récord; empatarlo no lo supera.
+  
   return comparable.every((record) => result.elapsedSeconds < record.elapsedSeconds);
 }
 
 export function addGameRecord(records, result) {
   if (!isGameRecord(result)) throw new Error('El resultado del juego no es válido.');
-  // Reintentar un guardado utiliza el mismo id y no concede el premio dos veces.
+  
   return records.some((record) => record.id === result.id) ? records : [...records, result];
 }

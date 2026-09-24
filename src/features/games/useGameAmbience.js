@@ -32,7 +32,7 @@ export default function useGameAmbience(phase) {
   }
 
   useEffect(() => {
-    // Cada cambio a una fase inactiva detiene la música. La muestra se inicia solo por clic.
+    
     if (phase !== 'playing') {
       player.current?.pause();
       setPreviewing(false);
@@ -49,7 +49,7 @@ export default function useGameAmbience(phase) {
     }
     function anotherSourceStarted(event) {
       if (event.detail?.source !== 'youtube') return;
-      // Ceder el audio es temporal: NO cambia la preferencia de música para la siguiente partida.
+      
       setYieldedToMusic(preferences.current.enabled);
       setPreviewing(false);
       player.current?.pause();

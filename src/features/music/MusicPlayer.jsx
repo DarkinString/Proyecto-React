@@ -36,8 +36,6 @@ export default function MusicPlayer({ track, playRequest, onNext, onPrevious, ha
       if (cancelled || !hostRef.current) return;
       const initialTrack = trackRef.current;
       const embedUrl = new URL(youtubeEmbedUrl(initialTrack, window.location.origin));
-      // YouTube crea y conecta el iframe, como en su ejemplo oficial.
-      // La política de referencia inicial se hereda del meta de index.html.
       mount = document.createElement('div');
       hostRef.current.replaceChildren(mount);
       readyTimer = window.setTimeout(() => {
@@ -58,7 +56,7 @@ export default function MusicPlayer({ track, playRequest, onNext, onPrevious, ha
             playerReadyRef.current = true;
             setReady(true);
             target.getIframe().setAttribute('title', 'Reproductor oficial de YouTube');
-            // La configuración ya contiene la selección: no la volvemos a cargar en onReady.
+            
             if (!contentError) {
               setError('');
               setNotice('Pulsa ▶ dentro del video si tu navegador solicita un toque para escuchar.');
@@ -96,15 +94,13 @@ export default function MusicPlayer({ track, playRequest, onNext, onPrevious, ha
       clearTimeout(readyTimer);
       playerReadyRef.current = false;
       playerRef.current = null;
-      try { player?.destroy(); } catch { /* Puede haberse retirado el iframe antes de esta limpieza. */ }
+      try { player?.destroy(); } catch {  }
       mount?.remove();
     };
-  // Elegir otro enlace reemplaza también un iframe que no llegó a onReady.
+  
   }, [hasTrack, retry, track?.kind, track?.id]);
 
   useEffect(() => {
-    // Seleccionar la misma canción permite reanudar; no se recarga su src ni se reinicia su tiempo.
-    // El scroll no pausa ni desmonta el iframe, esté flotante o en su sección.
     if (playerReadyRef.current) playerRef.current?.playVideo();
   }, [playRequest]);
 

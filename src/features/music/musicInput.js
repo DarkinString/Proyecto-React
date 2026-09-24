@@ -1,6 +1,5 @@
 import { parseYouTubeUrl } from '../../services/youtube.js';
 
-// Diferenciamos el texto de búsqueda de un enlace sin hacer peticiones de red.
 export function classifyMusicInput(value) {
   const text = value.trim();
   if (!text) return { kind: 'empty', value: '' };

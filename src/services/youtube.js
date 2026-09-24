@@ -7,7 +7,6 @@ export const hasYouTubeKey = Boolean(configuredKey);
 export const YOUTUBE_STORAGE_KEY = 'mirukaleta.youtube.v1';
 export const entryKey = (entry) => `${entry.kind}:${entry.id}`;
 
-// Solo aceptamos enlaces de YouTube: nunca usamos una URL pegada como destino de fetch.
 export function parseYouTubeUrl(value) {
   let url;
   try { url = new URL(value.trim()); } catch { throw new Error('Pega un enlace completo de YouTube.'); }
@@ -20,7 +19,6 @@ export function parseYouTubeUrl(value) {
     : url.pathname === '/watch' ? url.searchParams.get('v')
       : ['shorts', 'embed', 'live'].includes(parts[0]) ? parts[1] : null;
   const playlistId = url.searchParams.get('list');
-  // Un enlace watch con list representa la playlist para conservar la selección del usuario.
   if (playlistId && PLAYLIST_ID.test(playlistId)) return { kind: 'playlist', id: playlistId };
   if (videoId && VIDEO_ID.test(videoId)) return { kind: 'video', id: videoId };
   throw new Error('El enlace no contiene un video o una playlist de YouTube válidos.');
@@ -43,7 +41,6 @@ export function youtubeUrl(track) {
 }
 
 function decodeTitle(value) {
-  // search.list codifica entidades HTML; las convertimos a texto, nunca a HTML ejecutable.
   return String(value || '').replace(/&(amp|quot|apos|lt|gt|#39|#x27);/gi, (entity) => ({
     '&amp;': '&', '&quot;': '"', '&apos;': "'", '&lt;': '<', '&gt;': '>', '&#39;': "'", '&#x27;': "'",
   })[entity.toLowerCase()] || entity).slice(0, 300);
@@ -121,7 +118,6 @@ export async function importPlaylist(value, signal, apiKey) {
   return { tracks, received };
 }
 
-// Los títulos de YouTube viven en memoria: localStorage guarda únicamente favoritos y etiquetas propias.
 export async function fetchMetadata(bookmarks, signal, apiKey) {
   const details = [];
   for (const kind of ['video', 'playlist']) {
