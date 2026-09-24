@@ -1,0 +1,57 @@
+/* Una capa decorativa adicional, independiente de las luces y el brillo del cursor. */
+.background-starfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.background-star {
+  position: absolute;
+  left: var(--star-x);
+  top: var(--star-y);
+  width: var(--star-size);
+  height: var(--star-size);
+  color: var(--star-color);
+  opacity: 0.32;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.background-star--dot {
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 7px currentColor;
+}
+
+.background-star--sparkle {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.background-star--sparkle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+}
+
+.background-starfield[data-animate="true"] .background-star {
+  animation: background-star-breathe var(--star-duration) ease-in-out var(--star-delay) infinite;
+}
+
+/* El brillo sube y baja lentamente; nunca se enciende y apaga de golpe. */
+@keyframes background-star-breathe {
+  0%, 100% { opacity: 0.16; transform: translate(-50%, -50%) scale(0.88); }
+  50% { opacity: 0.52; transform: translate(-50%, -50%) scale(1.12); }
+}
+
+@media (max-width: 600px) {
+  /* 24 estrellas en móvil, 32 en pantallas más amplias. */
+  .background-star:nth-child(4n) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background-starfield[data-animate="true"] .background-star { animation: none; }
+}

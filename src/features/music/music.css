@@ -1,0 +1,22 @@
+.youtube-player-space { scroll-margin-top: 2rem; }
+.youtube-player-space--floating { min-height: 120px; }
+.youtube-player { position: relative; background: var(--surface); touch-action: pan-y; }
+.youtube-player-title, .youtube-drag-help, .youtube-player > h3 { touch-action: none; user-select: none; }
+.youtube-player[tabindex] { cursor: grab; }
+.youtube-player[data-dragging="true"] { cursor: grabbing; }
+.youtube-player button, .youtube-player a { touch-action: manipulation; }
+.youtube-drag-help { position: relative; padding-bottom: .4rem; font-size: .75rem; color: var(--color-muted); user-select: none; }
+.youtube-player[data-holding="true"] .youtube-drag-help::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; border-radius: 1rem; background: var(--color-accent); transform-origin: left; animation: hold-to-carry 2s linear both; }
+.youtube-player.youtube-player--floating { background: var(--color-paper); }
+.youtube-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; min-width: 200px; min-height: 200px; background: #10182b; }
+.youtube-frame-host, .youtube-frame iframe { display: block; width: 100%; height: 100%; min-height: 200px; border: 0; }
+.youtube-frame-host { position: absolute; inset: 0; }
+.youtube-player--floating { position: fixed; z-index: 60; left: 1rem; bottom: 1rem; width: min(400px, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow-y: auto; background: var(--bubble); border: 1px solid var(--color-line); box-shadow: 0 16px 60px #10182b44; transition: box-shadow 180ms ease, border-color 180ms ease, scale 180ms ease; }
+.youtube-player--floating[data-dragging="true"] { z-index: 64; scale: 1.015; border-color: var(--color-accent); box-shadow: 0 24px 70px #10182b66; }
+.youtube-float-toggle { border: 1px solid var(--color-line); border-radius: 999px; padding: .4rem .7rem; font-size: .75rem; color: var(--color-accent); cursor: pointer; }
+.youtube-float-toggle:hover { background: var(--surface); }
+.youtube-player a:focus-visible, .youtube-float-toggle:focus-visible, .youtube-player:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+@media (max-width: 420px) { .youtube-player--floating { left: .5rem; bottom: .5rem; width: calc(100vw - 1rem); } }
+@media (prefers-reduced-motion: reduce) { .youtube-player--floating { transition: none; } .youtube-player--floating[data-dragging="true"] { scale: 1; } }
+[data-motion="off"] .youtube-player--floating { transition: none; }
+[data-motion="off"] .youtube-player--floating[data-dragging="true"] { scale: 1; }

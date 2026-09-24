@@ -1,0 +1,11 @@
+.game-ambience { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; padding: 1rem 1.15rem; border: 1px solid var(--color-line); border-radius: 1.25rem; background: var(--surface); }
+.game-ambience-title { display: flex; align-items: center; gap: .8rem; min-width: 0; }
+.game-ambience-note { font-size: 1.9rem; color: var(--color-violet); }
+.game-ambience-title strong { font-family: var(--font-serif); font-size: 1.15rem; color: var(--color-ink); }
+.game-ambience-title p { margin-top: .15rem; font-size: .78rem; line-height: 1.5; color: var(--color-muted); }
+.game-ambience-controls { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem 1rem; }
+.game-ambience-controls .button-secondary { font-size: .8rem; padding: .5rem .8rem; }
+.game-ambience-volume { display: block; min-width: 7rem; max-width: 10rem; font-size: .75rem; color: var(--color-muted); }
+.game-ambience-volume > span { display: flex; justify-content: space-between; gap: .8rem; }
+.game-ambience-volume input { display: block; width: 100%; min-height: 1.5rem; accent-color: var(--color-violet); cursor: pointer; }
+@media (max-width: 540px) { .game-ambience { align-items: stretch; } .game-ambience-controls { justify-content: space-between; width: 100%; } }
